@@ -1,27 +1,6 @@
 local M = {}
 
-M.path = "plugins/chad-nvconfig/init.lua"
-
-M.base46 = {
-  integrations = {
-    "blankline",
-    "cmp",
-    "defaults",
-    "devicons",
-    "git",
-    "lsp",
-    "mason",
-    "nvcheatsheet",
-    "nvdash",
-    "nvimtree",
-    "statusline",
-    "syntax",
-    "treesitter",
-    "tbline",
-    "telescope",
-    "whichkey",
-  },
-}
+M.path = "plugins/chad-nvconfig.lua"
 
 M.ui = {
   ------------------------------- base46 -------------------------------------
@@ -101,3 +80,25 @@ M.ui = {
     },
   },
 }
+
+M.base46 = {
+  integrations = {
+    "blankline",
+    "cmp",
+    "defaults",
+    "devicons",
+    "git",
+    "lsp",
+    "mason",
+    "nvcheatsheet",
+    "nvdash",
+    "nvimtree",
+    "statusline",
+    "syntax",
+    "treesitter",
+    "tbline",
+    "telescope",
+    "whichkey",
+  },
+}
+
