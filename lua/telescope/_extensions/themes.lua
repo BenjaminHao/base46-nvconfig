@@ -7,10 +7,10 @@ local actions = require "telescope.actions"
 local action_set = require "telescope.actions.set"
 local action_state = require "telescope.actions.state"
 
-local old_theme = require("chad-nvconfig").ui.theme
+local old_theme = require("nvconfig").ui.theme
 
 local function reload_theme(name)
-  require("chad-nvconfig").ui.theme = name
+  require("nvconfig").ui.theme = name
   require("base46").load_all_highlights()
   vim.api.nvim_exec_autocmds("User", { pattern = "Base46ThemeReload" })
 end
@@ -36,7 +36,7 @@ local function switcher()
     prompt_title = "󱥚 Set Base46 Theme",
     previewer = previewer,
     finder = finders.new_table {
-      results = require("chad-nvconfig.utils").list_base46_themes(),
+      results = require("nvconfig.utils").list_base46_themes(),
     },
     sorter = conf.generic_sorter(),
 

@@ -12,7 +12,7 @@ M.list_base46_themes = function()
 end
 
 M.replace_theme_name = function(old, new)
-  local path = require("chad-nvconfig").path
+  local path = require("nvconfig").path
   local configPath = vim.fn.stdpath "config" .. "/lua/" .. path
   local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
 
