@@ -1,5 +1,4 @@
 local M = {}
-local fn = vim.fn
 
 M.list_base46_themes = function()
   local base46_themes = vim.fn.readdir(vim.fn.stdpath "data" .. "/lazy/base46/lua/base46/themes")
