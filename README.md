@@ -14,3 +14,5 @@ return {
   end,
 }
 ```
+---
+***Note: use :Telescope themes to change themes***
