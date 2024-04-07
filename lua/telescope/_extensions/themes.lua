@@ -7,6 +7,7 @@ local actions = require "telescope.actions"
 local action_set = require "telescope.actions.set"
 local action_state = require "telescope.actions.state"
 
+-- get current theme saved on nvconfig
 local old_theme = require("nvconfig").ui.theme
 
 local function reload_theme(name)
@@ -62,13 +63,13 @@ local function switcher()
         reload_theme(action_state.get_selected_entry()[1])
       end)
 
-      -- save theme
+      ------------ save theme to config file on enter ----------------
       actions.select_default:replace(function()
         if action_state.get_selected_entry() then
           local selected_theme = action_state.get_selected_entry()[1]
           require("nvconfig.utils").save_base46_themes(old_theme, selected_theme)
-          -- old_theme = selected_theme
           actions.close(prompt_bufnr)
+          old_theme = selected_theme
         end
       end)
       return true
