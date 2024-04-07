@@ -1,1 +1,5 @@
-return require("nvconfig.config").options
+local config = require("nvconfig.config")
+
+local M = config.options
+
+return M

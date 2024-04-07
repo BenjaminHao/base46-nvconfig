@@ -1,7 +1,15 @@
 local M = {}
 
-M.list_base46_themes = function()
+function M.list_base46_themes()
   local base46_themes = vim.fn.readdir(vim.fn.stdpath "data" .. "/lazy/base46/lua/base46/themes")
+  local custom_themes = vim.loop.fs_stat(vim.fn.stdpath "config" .. "/lua/themes")
+
+  if custom_themes and custom_themes.type == "directory" then
+    local themes_tb = vim.fn.readdir(vim.fn.stdpath "config" .. "/lua/themes")
+    for _, value in ipairs(themes_tb) do
+      table.insert(base46_themes, value)
+    end
+  end
 
   for index, theme in ipairs(base46_themes) do
     base46_themes[index] = theme:match "(.+)%..+"
@@ -10,32 +18,49 @@ M.list_base46_themes = function()
   return base46_themes
 end
 
-M.replace_theme_name = function(old, new)
-  local path = require("nvconfig").path
-  local configPath = vim.fn.stdpath "config" .. "/lua/" .. path
+function M.save_base46_themes(old, new)
+  local config_path = require("nvconfig.config").path
   local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
 
-  local ERROR_MSG_FILE = "\nConfiguration file was not found or read/write permissions are missing."
-    .. "\nPlease check your configuration parameter: { path: '"
-    .. configPath
-    .. "' }"
+  local WARN_SAVE_THEME = "** This theme will NOT be saved. **"
+  .. "\nTo change a theme, add theme option in your nvconfig opts:"
+  .. "\n{"
+  .. "\n  ui = {"
+  .. "\n    theme = 'your_base46_theme',"
+  .. "\n  },"
+  .. "\n}"
 
-  local file = io.open(configPath, "r")
+  local file, err = io.open(config_path, "r")
   if not file then
-    error(ERROR_MSG_FILE)
+    vim.notify(
+      "Error opening config file for reading: " .. (err or "unknown error"),
+      vim.log.levels.ERROR
+    )
     return
   end
 
-  local new_content = file:read("*all"):gsub(added_pattern, new)
+  local config_content = file:read("*all")
+  file:close()
 
-  file = io.open(configPath, "w")
-  if not file then
-    error(ERROR_MSG_FILE)
+  if not config_content:find(old) then
+    vim.notify(WARN_SAVE_THEME, vim.log.levels.WARN)
     return
   end
 
+  file, err = io.open(config_path, "w")
+  if not file then
+    vim.notify(
+      "Error opening file for writing: " .. (err or "unknown error"),
+      vim.log.levels.ERROR
+    )
+    return
+  end
+
+  local new_content = config_content:gsub(added_pattern, new)
   file:write(new_content)
   file:close()
+
+  vim.cmd("checktime")
 end
 
 return M

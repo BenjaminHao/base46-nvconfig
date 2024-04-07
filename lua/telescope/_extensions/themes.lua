@@ -66,8 +66,8 @@ local function switcher()
       actions.select_default:replace(function()
         if action_state.get_selected_entry() then
           local selected_theme = action_state.get_selected_entry()[1]
-          require("chad-nvconfig.utils").replace_theme_name(old_theme, selected_theme)
-          old_theme = selected_theme
+          require("nvconfig.utils").save_base46_themes(old_theme, selected_theme)
+          -- old_theme = selected_theme
           actions.close(prompt_bufnr)
         end
       end)

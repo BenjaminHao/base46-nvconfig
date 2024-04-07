@@ -1,7 +1,8 @@
+local Util = require("nvconfig.utils")
+
 local M = {}
 
 local defaults = { -- default nvconfig module from Nvchad
-  path = "plugins/nvconfig.lua",
   ui = {
     ------------------------------- base46 -------------------------------------
     -- hl = highlights
@@ -93,15 +94,19 @@ local defaults = { -- default nvconfig module from Nvchad
 }
 
 M.options = {}
+M.path = ""
 
 function M.setup(opts)
   M.options = vim.tbl_deep_extend("force", defaults, opts or {})
-  local success, base46 = pcall(require, "base46")
-  if success then base46.load_all_highlights()
-  else vim.notify("Error Loading base46.", vim.log.levels.ERROR)
-  end
-end
+  M.path = debug.getinfo(2, "S").source:sub(2)
 
-M.setup()
+  local success, base46 = pcall(require, "base46")
+  if not success then
+    vim.notify("Error Loading base46.", vim.log.levels.ERROR)
+  end
+
+  vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+  base46.load_all_highlights()
+end
 
 return M
