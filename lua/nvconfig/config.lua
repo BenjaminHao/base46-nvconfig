@@ -3,6 +3,22 @@ local Util = require("nvconfig.utils")
 local M = {}
 
 local defaults = { -- default nvconfig module from Nvchad
+  base46 = {
+    integrations = {
+      "blankline",
+      "cmp",
+      "defaults",
+      "devicons",
+      "git",
+      "lsp",
+      "mason",
+      "nvimtree",
+      "syntax",
+      "treesitter",
+      "telescope",
+      "whichkey",
+    },
+  },
   ui = {
     ------------------------------- base46 -------------------------------------
     -- hl = highlights
@@ -18,7 +34,10 @@ local defaults = { -- default nvconfig module from Nvchad
       style = "default", -- default/flat_light/flat_dark/atom/atom_colored
     },
     telescope = { style = "borderless" }, -- borderless / bordered
-    ------------------------------- nvchad_ui modules -----------------------------
+    --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+    --                            ┃ USELESS ┃
+    --                            ┗━━━━━━━━━┛
+    -------------------------- nvchad_ui modules -------------------------------
     statusline = {
       theme = "default", -- default/vscode/vscode_colored/minimal
       -- default/round/block/arrow separators work only for default statusline theme
@@ -71,26 +90,9 @@ local defaults = { -- default nvconfig module from Nvchad
       },
     },
   },
-  base46 = {
-    integrations = {
-      "blankline",
-      "cmp",
-      "defaults",
-      "devicons",
-      "git",
-      "lsp",
-      "mason",
-      "nvcheatsheet",
-      "nvdash",
-      "nvimtree",
-      "statusline",
-      "syntax",
-      "treesitter",
-      "tbline",
-      "telescope",
-      "whichkey",
-    },
-  },
+  --          ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  --          ┃ Send useless config to base46 to make it work┃
+  --━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━--
 }
 
 M.options = {}
