@@ -21,13 +21,28 @@ local function switcher()
 
   -- show current buffer content in previewer
   local previewer = previewers.new_buffer_previewer {
-    define_preview = function(self, entry)
+    define_preview = function(self, _)
       -- add content
-      local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-      vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
-
-      -- add syntax highlighting in previewer
+      local preview_content = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
       local ft = (vim.filetype.match { buf = bufnr } or "diff"):match "%w+"
+
+      -- if alpha or dashboard show preview content
+      if vim.api.nvim_buf_get_option(bufnr, 'filetype') == "alpha" or "dashboard" then
+        local path = vim.fn.stdpath("data") .. "/lazy/base46-nvconfig/lua/nvconfig/previewer.lua"
+        local file = io.open(path, "r")
+        if file then
+          preview_content = {}
+          ft = "lua"
+          for line in file:lines() do
+            table.insert(preview_content, line)
+          end
+          file:close()
+        end
+      end
+
+      -- get content in previewer
+      vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, preview_content)
+      -- add syntax highlighting in previewer
       require("telescope.previewers.utils").highlighter(self.state.bufnr, ft)
     end,
   }
