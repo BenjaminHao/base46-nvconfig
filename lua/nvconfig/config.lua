@@ -34,6 +34,26 @@ local defaults = { -- default nvconfig module from Nvchad
       style = "default", -- default/flat_light/flat_dark/atom/atom_colored
     },
     telescope = { style = "borderless" }, -- borderless / bordered
+    telescope_filter = {
+      "",
+      "alpha",
+      "checkhealth",
+      "cmp_menu",
+      "dashboard",
+      "help",
+      "lazy",
+      "lspinfo",
+      "man",
+      "mason",
+      "neo-tree",
+      "noice",
+      "notify",
+      "nvimtree",
+      "qf",
+      "spectre_panel",
+      "telescope",
+      "vim",
+    },
     --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
     --                            ┃ USELESS ┃
     --                            ┗━━━━━━━━━┛

@@ -42,7 +42,7 @@ function M.save_base46_themes(old, new)
   local config_content = file:read("*all")
   file:close()
 
-  if not config_content:find(old) then
+  if not config_content:find(added_pattern) then
     vim.notify(WARN_SAVE_THEME, vim.log.levels.WARN)
     return
   end
@@ -61,6 +61,16 @@ function M.save_base46_themes(old, new)
   file:close()
 
   vim.cmd("checktime")
+end
+
+function M.ft_filter(ft)
+  local filter = require("nvconfig").ui.telescope_filter
+  for _, entry in pairs(filter) do
+   if string.find(entry:lower(), ft:lower()) then
+      return true
+    end
+  end
+  return false
 end
 
 return M
