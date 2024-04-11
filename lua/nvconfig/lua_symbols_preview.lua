@@ -1,21 +1,22 @@
---[[
-    This file is for theme preview purpose.
-]]
+--╭──────────────────────────────────────────────────────────────────────────╮--
+--│                  This file is for theme preview purpose.                 │--
+--╰──────────────────────────────────────────────────────────────────────────╯--
 local my_variable = "Hello, world!" -- Strings
 local number = 42 -- numbers
 local result = (number + 10) * 2 -- Operators
 local my_table = {apple = "fruit", car = "vehicle", dog = "animal"} -- Tables
+
 local function greet(name) -- Functions
     print("Hello, " .. name)
 end
 
 -- Control Structures
-if number > 30 then
-    print("Number is greater than 30")
-elseif number == 30 then
-    print("Number is exactly 30")
+if number > 0 then
+    print(number .. " is positive.")
+elseif number == 0 then
+    print("Number is 0")
 else
-    print("Number is less than 30")
+    print(number .. " is negative.")
 end
 
 for i = 1, 5 do
